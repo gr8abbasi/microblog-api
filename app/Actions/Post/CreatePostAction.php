@@ -18,12 +18,6 @@ class CreatePostAction
     ) {}
 
     /**
-     * Orchestrate post creation — validate input then persist.
-     *
-     * Application-layer use case handler — not domain logic.
-     * Coordinates between the domain rule (PostBodyRule) and the
-     * persistence layer (PostRepository).
-     *
      * @throws ValidationException if body fails validation
      */
     public function execute(User $user, string $body): Post

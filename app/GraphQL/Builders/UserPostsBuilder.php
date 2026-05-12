@@ -12,8 +12,7 @@ use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 class UserPostsBuilder
 {
     /**
-     * Posts scoped to the resolved user — newest first.
-     * Lighthouse applies pagination on top of this builder.
+     * Posts scoped to the resolved user, newest first.
      *
      * @param  array<string, mixed>  $args
      */

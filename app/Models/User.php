@@ -17,8 +17,6 @@ class User extends Authenticatable
         'name',
         'username',
         'email',
-        // password intentionally excluded — must be set explicitly
-        // via Hash::make() to prevent accidental plain-text storage
     ];
 
     protected $hidden = [
@@ -32,7 +30,6 @@ class User extends Authenticatable
 
     /**
      * Posts belonging to this user.
-     * No ordering here — applied at query level in builders.
      */
     public function posts(): HasMany
     {

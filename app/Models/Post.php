@@ -22,17 +22,11 @@ class Post extends Model
         'updated_at' => 'datetime',
     ];
 
-    /**
-     * Automatically trim whitespace when setting body.
-     */
     public function setBodyAttribute(string $value): void
     {
         $this->attributes['body'] = trim($value);
     }
 
-    /**
-     * The author of this post.
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

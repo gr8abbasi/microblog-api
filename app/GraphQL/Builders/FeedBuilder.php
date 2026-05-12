@@ -12,11 +12,7 @@ use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 class FeedBuilder
 {
     /**
-     * Global feed — newest posts first.
-     *
-     * Eager loads `user` here, at the point the query is constructed,
-     * guaranteeing N+1 protection regardless of how Lighthouse resolves.
-     * Lighthouse applies pagination on top of this builder.
+     * Global feed, newest posts first.
      *
      * @param  array<string, mixed>  $args
      */

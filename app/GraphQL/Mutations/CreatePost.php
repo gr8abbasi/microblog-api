@@ -18,12 +18,7 @@ class CreatePost
     ) {}
 
     /**
-     * Thin resolver — delegates to the application action.
-     *
-     * Laravel's ValidationException must be explicitly converted to
-     * Lighthouse's ValidationException here because only ClientAware
-     * exceptions are intercepted by GraphQLExceptionHandler.
-     * LaravelValidationException does not implement ClientAware.
+     * Delegates to the application action.
      *
      * @param  array<string, mixed>  $args
      */

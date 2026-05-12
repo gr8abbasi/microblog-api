@@ -13,10 +13,6 @@ class MicroblogTest extends TestCase
 {
     use RefreshDatabase;
 
-    // -------------------------------------------------------------------------
-    // Global Feed
-    // -------------------------------------------------------------------------
-
     #[Test]
     public function global_feed_returns_paginated_posts_with_correct_structure(): void
     {
@@ -93,10 +89,6 @@ class MicroblogTest extends TestCase
         $this->assertEquals((string) $old->id, $ids->last());
     }
 
-    // -------------------------------------------------------------------------
-    // User Profile
-    // -------------------------------------------------------------------------
-
     #[Test]
     public function user_profile_returns_user_with_their_posts(): void
     {
@@ -139,10 +131,6 @@ class MicroblogTest extends TestCase
         $response->assertOk()
             ->assertJsonPath('data.user', null);
     }
-
-    // -------------------------------------------------------------------------
-    // Post Creation
-    // -------------------------------------------------------------------------
 
     #[Test]
     public function authenticated_user_can_create_a_post(): void
@@ -217,9 +205,6 @@ class MicroblogTest extends TestCase
             ',
         ]);
 
-        // Lighthouse returns 200 with error in body — correct GraphQL behaviour
-        // AuthenticationException is handled by bootstrap/app.php workaround
-        // for Lighthouse v6.66 + Laravel 13 compatibility
         $response->assertOk();
         $this->assertNotNull($response->json('errors'));
         $this->assertEquals('Unauthenticated.', $response->json('errors.0.message'));
