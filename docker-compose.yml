@@ -11,8 +11,8 @@ services:
       DB_CONNECTION: sqlite
       DB_DATABASE: /var/www/database/database.sqlite
     command: >
-      sh -c "[ ! -f .env ] && cp .env.example .env && php artisan key:generate;
-            composer install --no-interaction --prefer-dist &&
+      sh -c "composer install --no-interaction --prefer-dist &&
+             [ ! -f .env ] && cp .env.example .env && php artisan key:generate;
              php artisan migrate --force &&
              php artisan db:seed --force &&
              php artisan serve --host=0.0.0.0 --port=8000"
