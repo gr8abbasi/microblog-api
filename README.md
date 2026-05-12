@@ -18,15 +18,15 @@ A microblogging backend built with Laravel 11 and Lighthouse GraphQL.
 
 **Docker (recommended):**
 ```bash
-git clone https://github.com/gr8abbasi/microblog.git
-cd microblog
+git clone https://github.com/gr8abbasi/microblog-api.git
+cd microblog-api
 docker compose up --build -d
 ```
 
 **Local:**
 ```bash
-git clone https://github.com/gr8abbasi/microblog.git
-cd microblog
+git clone https://github.com/gr8abbasi/microblog-api.git
+cd microblog-api
 composer install
 cp .env.example .env
 php artisan key:generate
