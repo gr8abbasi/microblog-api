@@ -1,0 +1,50 @@
+"A datetime string with format `Y-m-d H:i:s`"
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+type Query {
+    "Fetch a single user by their unique username, including paginated posts."
+    user(username: String! @eq): User @find
+
+    "Paginated global feed of all posts across the platform, newest first."
+    feed(
+        first: Int! = 10
+        page: Int
+    ): [Post!]!
+        @paginate(builder: "App\\GraphQL\\Builders\\FeedBuilder", defaultCount: 10, maxCount: 50)
+}
+
+type Mutation {
+    "Create a new post. Requires authentication via Sanctum token."
+    createPost(input: CreatePostInput! @spread): Post
+        @guard(with: ["sanctum"])
+        @field(resolver: "App\\GraphQL\\Mutations\\CreatePost")
+}
+
+"A registered platform user."
+type User {
+    id: ID!
+    name: String!
+    username: String!
+    createdAt: DateTime! @rename(attribute: "created_at")
+
+    "Paginated posts by this user, newest first."
+    posts(first: Int! = 10, page: Int): [Post!]!
+        @paginate(builder: "App\\GraphQL\\Builders\\UserPostsBuilder", defaultCount: 10, maxCount: 50)
+}
+
+"A microblog post — max 280 characters."
+type Post {
+    id: ID!
+    body: String!
+    createdAt: DateTime! @rename(attribute: "created_at")
+
+    "The author of this post. Resolved via batch loading to prevent N+1."
+    user: User! @belongsTo
+}
+
+"Input for creating a new post."
+input CreatePostInput {
+    "The post content. Must be between 1 and 280 characters."
+    body: String!
+        @rules(apply: ["required", "string", "min:1", "max:280"])
+}
